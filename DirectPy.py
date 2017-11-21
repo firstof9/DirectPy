@@ -58,7 +58,7 @@ class DIRECTV:
             self.standby = (jResp['mode'] == 1)
 		
         """Handle clientAddrs that are offline/not reporting for some reason"""
-	elif jResp['status']['code'] == 403:
+        elif jResp['status']['code'] == 403:
             self.standby = 1
 
         return self.standby
@@ -75,7 +75,7 @@ class DIRECTV:
     def get_tuned(self):
         """Returns the channel and program information of the current channel."""
         jResp = requests.get('%s/tv/getTuned?clientAddr=%s' % (self.base_url,self.clientAddr)).json()
-	if jResp['status']['code'] == 200: 
+        if jResp['status']['code'] == 200: 
             self.channel = self._combine_channel(jResp['major'],jResp['minor'])
         
         return jResp
